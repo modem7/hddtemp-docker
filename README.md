@@ -1,6 +1,6 @@
 # hddtemp-docker
 
-![Docker Pulls](https://img.shields.io/docker/pulls/modem7/hddtemp-docker)
+![Docker Pulls](https://img.shields.io/docker/pulls/modem7/hddtemp-docker) ![Docker Image Size (tag)](https://img.shields.io/docker/image-size/modem7/hddtemp-docker/latest)
 
 Docker container for hddtemp:
 http://savannah.nongnu.org/projects/hddtemp
