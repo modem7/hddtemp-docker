@@ -1,9 +1,9 @@
 kind: pipeline
 type: docker
-name: publish 
+name: latest 
 
 steps:
-- name: publish
+- name: latest
   image: plugins/docker
   settings:
     username:
@@ -15,6 +15,30 @@ steps:
     tags: 
       - latest 
       - 1.4
+
+# trigger:
+  # event:
+  # - cron
+  # cron:
+  # - hastebin_latest
+
+---
+
+kind: pipeline
+type: docker
+name: stable 
+
+steps:
+- name: stable
+  image: plugins/docker
+  settings:
+    username:
+      from_secret: docker_username
+    password:
+      from_secret: docker_password
+    purge: true
+    repo: modem7/hddtemp-docker
+    tags: stable
 
 # trigger:
   # event:
