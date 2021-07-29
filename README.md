@@ -5,6 +5,12 @@
 Docker container for hddtemp:
 http://savannah.nongnu.org/projects/hddtemp
 
+# Tags: 
+Latest - Gets automatically built every week. 
+
+Stable - Gets automatically built every month. 
+
+
 NOTE: This repository will install hddtemp in the docker container from apt repositories. I do not maintain the hddtemp project.
 
 Example:
