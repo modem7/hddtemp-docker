@@ -10,10 +10,10 @@ Latest - Gets automatically built every week.
 
 Stable - Gets automatically built every month. 
 
-
+# Note
 NOTE: This repository will install hddtemp in the docker container from apt repositories. I do not maintain the hddtemp project.
 
-Example:
+# Example:
 ```
 docker run -d \
 --privileged=true 
