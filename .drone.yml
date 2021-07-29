@@ -16,11 +16,11 @@ steps:
       - latest 
       - 1.4
 
-# trigger:
-  # event:
-  # - cron
-  # cron:
-  # - hastebin_latest
+trigger:
+  event:
+    - cron
+  cron:
+    - hddtemp_latest
 
 ---
 
@@ -40,8 +40,8 @@ steps:
     repo: modem7/hddtemp-docker
     tags: stable
 
-# trigger:
-  # event:
-  # - cron
-  # cron:
-  # - hastebin_latest
+trigger:
+  event:
+    - cron
+  cron:
+    - hddtemp_stable
