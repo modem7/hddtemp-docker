@@ -18,9 +18,9 @@ steps:
 
 trigger:
   event:
-    - cron
+  - cron
   cron:
-    - hddtemp_latest
+  - hddtemp_latest
 
 ---
 
@@ -42,6 +42,6 @@ steps:
 
 trigger:
   event:
-    - cron
+  - cron
   cron:
-    - hddtemp_stable
+  - hddtemp_stable
