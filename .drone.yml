@@ -1,19 +1,25 @@
 kind: pipeline
 type: docker
-name: latest 
+name: latest
+
+platform:
+  os: linux
+  arch: amd64
 
 steps:
-- name: latest
-  image: plugins/docker
+- name: latest  
+  image: thegeeklab/drone-docker-buildx
+  privileged: true
   settings:
+    repo: modem7/hddtemp-docker
+    purge: true
+    platforms: linux/amd64,linux/arm64,linux/arm/v6,linux/arm/v7,linux/arm/v8
     username:
       from_secret: docker_username
     password:
       from_secret: docker_password
-    purge: true
-    repo: modem7/hddtemp-docker
     tags: 
-      - latest 
+      - latest
       - 1.4
 
 trigger:
@@ -26,19 +32,27 @@ trigger:
 
 kind: pipeline
 type: docker
-name: stable 
+name: stable
+
+platform:
+  os: linux
+  arch: amd64
 
 steps:
-- name: stable
-  image: plugins/docker
+- name: stable  
+  image: thegeeklab/drone-docker-buildx
+  privileged: true
   settings:
+    repo: modem7/hddtemp-docker
+    purge: true
+    platforms: linux/amd64,linux/arm64,linux/arm/v6,linux/arm/v7,linux/arm/v8
     username:
       from_secret: docker_username
     password:
       from_secret: docker_password
-    purge: true
-    repo: modem7/hddtemp-docker
-    tags: stable
+    tags: 
+      - latest
+      - 1.4
 
 trigger:
   event:
