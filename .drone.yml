@@ -18,15 +18,13 @@ steps:
       from_secret: docker_username
     password:
       from_secret: docker_password
-    tags: 
-      - latest
-      - 1.4
+    tags: latest
 
-trigger:
-  event:
-  - cron
-  cron:
-  - hddtemp_latest
+# trigger:
+  # event:
+  # - cron
+  # cron:
+  # - hddtemp_latest
 
 ---
 
@@ -50,12 +48,10 @@ steps:
       from_secret: docker_username
     password:
       from_secret: docker_password
-    tags: 
-      - latest
-      - 1.4
+    tags: stable
 
-trigger:
-  event:
-  - cron
-  cron:
-  - hddtemp_stable
+# trigger:
+  # event:
+  # - cron
+  # cron:
+  # - hddtemp_stable
