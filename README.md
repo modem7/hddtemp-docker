@@ -7,8 +7,8 @@ http://savannah.nongnu.org/projects/hddtemp
 
 # Tags: 
 Latest - Gets automatically built every week. 
-
-Stable - Gets automatically built every month. 
+Monthly - Gets automatically built every month. 
+Stable - Gets automatically built every year. 
 
 # Note
 NOTE: This repository will install hddtemp in the docker container from apt repositories. I do not maintain the hddtemp project.
