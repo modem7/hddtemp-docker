@@ -7,7 +7,9 @@ http://savannah.nongnu.org/projects/hddtemp
 
 # Tags: 
 Latest - Gets automatically built every week. 
+
 Monthly - Gets automatically built every month. 
+
 Stable - Gets automatically built every year. 
 
 # Note
