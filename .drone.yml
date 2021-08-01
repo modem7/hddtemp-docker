@@ -12,7 +12,7 @@ steps:
   privileged: true
   settings:
     repo: modem7/hddtemp-docker
-    purge: true
+    # purge: true
     platforms: linux/amd64,linux/arm64,linux/arm/v6,linux/arm/v7,linux/arm/v8
     username:
       from_secret: docker_username
@@ -42,7 +42,7 @@ steps:
   privileged: true
   settings:
     repo: modem7/hddtemp-docker
-    purge: true
+    # purge: true
     platforms: linux/amd64,linux/arm64,linux/arm/v6,linux/arm/v7,linux/arm/v8
     username:
       from_secret: docker_username
