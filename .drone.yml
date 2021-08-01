@@ -12,10 +12,46 @@ steps:
   privileged: true
   settings:
     repo: modem7/hddtemp-docker
-    # purge: true
+    purge: true
     platforms: linux/amd64,linux/arm64,linux/arm/v6,linux/arm/v7,linux/arm/v8
     username:
       from_secret: docker_username
     password:
       from_secret: docker_password
     tags: latest
+
+trigger:
+  event:
+  - cron
+  cron:
+  - hddtemp_latest
+
+---
+
+kind: pipeline
+type: docker
+name: stable
+
+platform:
+  os: linux
+  arch: amd64
+
+steps:
+- name: stable  
+  image: thegeeklab/drone-docker-buildx
+  privileged: true
+  settings:
+    repo: modem7/hddtemp-docker
+    purge: true
+    platforms: linux/amd64,linux/arm64,linux/arm/v6,linux/arm/v7,linux/arm/v8
+    username:
+      from_secret: docker_username
+    password:
+      from_secret: docker_password
+    tags: stable
+
+trigger:
+  event:
+  - cron
+  cron:
+  - hddtemp_stable
