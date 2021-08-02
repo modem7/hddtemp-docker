@@ -12,6 +12,7 @@ steps:
   privileged: true
   settings:
     repo: modem7/hddtemp-docker
+    compress: true
     purge: true
     cache_from: "modem7/hddtemp-docker:latest"
     platforms: linux/amd64,linux/arm/v7,linux/arm64/v8
