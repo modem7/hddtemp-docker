@@ -22,6 +22,15 @@ steps:
       from_secret: docker_password
     tags: latest
 
+steps:
+- name: slack
+  image: plugins/slack
+  settings:
+    webhook: https://hooks.slack.com/services/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
+    channel: docker
+  when:
+    status: [ success, failure ]
+
 # trigger:
   # event:
   # - cron
@@ -52,6 +61,15 @@ steps:
     password:
       from_secret: docker_password
     tags: monthly
+
+steps:
+- name: slack
+  image: plugins/slack
+  settings:
+    webhook: https://hooks.slack.com/services/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
+    channel: docker
+  when:
+    status: [ success, failure ]
 
 trigger:
   event:
@@ -84,14 +102,6 @@ steps:
       from_secret: docker_password
     tags: stable
 
-trigger:
-  event:
-  - cron
-  cron:
-  - hddtemp_stable
-  
----
-
 steps:
 - name: slack
   image: plugins/slack
@@ -100,3 +110,9 @@ steps:
     channel: docker
   when:
     status: [ success, failure ]
+
+trigger:
+  event:
+  - cron
+  cron:
+  - hddtemp_stable
