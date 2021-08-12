@@ -31,11 +31,11 @@ steps:
     status: [ success, failure ]
 
 
-# trigger:
-  # event:
-  # - cron
-  # cron:
-  # - hddtemp_latest
+trigger:
+  event:
+    - cron
+  cron:
+    - hddtemp_latest
 
 ---
 
