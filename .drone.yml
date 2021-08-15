@@ -1,3 +1,17 @@
+---
+kind: pipeline
+type: docker
+name: lint
+steps:
+  - name: Lint Dockerfile
+    image: hadolint/hadolint:latest-debian
+    pull: if-not-exists
+    commands:
+      - hadolint --version
+      - hadolint Dockerfile*
+
+---
+
 kind: pipeline
 type: docker
 name: deploy
@@ -34,11 +48,11 @@ steps:
     status: [ success, failure ]
 
 
-# trigger:
-  # event:
-    # - cron
-  # cron:
-    # - hddtemp_latest
+trigger:
+  event:
+    - cron
+  cron:
+    - hddtemp_latest
 
 ---
 
@@ -60,7 +74,6 @@ steps:
     cache_from: "modem7/hddtemp-docker:monthly"
     platforms: # if it doesn't work run docker run --privileged --rm tonistiigi/binfmt --install all
       - linux/amd64
-      - linux/arm/v6
       - linux/arm/v7
       - linux/arm64/v8
     username:
@@ -103,7 +116,6 @@ steps:
     cache_from: "modem7/hddtemp-docker:stable"
     platforms: # if it doesn't work run docker run --privileged --rm tonistiigi/binfmt --install all
       - linux/amd64
-      - linux/arm/v6
       - linux/arm/v7
       - linux/arm64/v8
     username:
@@ -125,3 +137,47 @@ trigger:
   - cron
   cron:
   - hddtemp_stable
+
+---
+
+kind: pipeline
+type: docker
+name: test
+
+platform:
+  os: linux
+  arch: amd64
+
+steps:
+- name: test  
+  image: thegeeklab/drone-docker-buildx
+  privileged: true
+  settings:
+    repo: modem7/hddtemp-docker
+    purge: true
+    cache_from: "modem7/hddtemp-docker:test"
+    platforms: # if it doesn't work run docker run --privileged --rm tonistiigi/binfmt --install all
+      - linux/amd64
+      - linux/arm/v7
+      - linux/arm64/v8
+    dockerfile: test/Dockerfile
+    context: test/
+    username:
+      from_secret: docker_username
+    password:
+      from_secret: docker_password
+    tags: test
+
+- name: slack
+  image: plugins/slack
+  settings:
+    webhook:
+      from_secret: slack_hook
+  when:
+    status: [ success, failure ]
+
+# trigger:
+  # event:
+  # - cron
+  # cron:
+  # - hddtemp_test
