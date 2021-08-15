@@ -3,11 +3,11 @@
 #
 
 # Pull base image.
-FROM ubuntu
-MAINTAINER Modem7
+FROM phusion/baseimage
+LABEL maintainer="Alex Lane <modem7@gmail.com>"
 
 # Install hddtemp
-RUN apt-get update && apt-get -y install build-essential hddtemp
+RUN apt-get update && apt-get -y install build-essential hddtemp --no-install-recommends
 
 COPY hddtemp.db /etc/
 
