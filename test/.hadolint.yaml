@@ -1,0 +1,7 @@
+override:
+  style:
+    - DL3006
+    - DL4000
+    - DL3008
+    - DL3015
+    - DL3025
