@@ -3,7 +3,7 @@
 #
 
 # Pull base image.
-FROM phusion/baseimage
+FROM phusion/baseimage:master
 LABEL maintainer="Alex Lane <modem7@gmail.com>"
 
 # Install hddtemp
