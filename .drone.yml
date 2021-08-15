@@ -155,6 +155,7 @@ steps:
   settings:
     repo: modem7/hddtemp-docker
     purge: true
+    compress: true
     cache_from: "modem7/hddtemp-docker:test"
     platforms: # if it doesn't work run docker run --privileged --rm tonistiigi/binfmt --install all
       - linux/amd64
