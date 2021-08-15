@@ -21,6 +21,8 @@ RUN rm -f /usr/sbin/hddtemp && \
     chmod +x /usr/sbin/hddtemp && \
     rm -fdr /temp
 
+EXPOSE 7634
+
 # Define default command.
 # example = -d --listen localhost --port 7634 /dev/s*
 CMD hddtemp $HDDTEMP_ARGS
