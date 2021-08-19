@@ -178,8 +178,6 @@ steps:
   when:
     status: [ success, failure ]
 
-# trigger:
-  # event:
-  # - cron
-  # cron:
-  # - hddtemp_test
+trigger:
+  event:
+    - custom
