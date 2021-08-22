@@ -42,7 +42,6 @@ steps:
   when:
     status: [ success, failure ]
 
-
 trigger:
   event:
     - cron
