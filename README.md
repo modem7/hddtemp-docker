@@ -8,8 +8,7 @@ http://savannah.nongnu.org/projects/hddtemp
 # Tags: 
 | Tag | Description |
 | :----: | --- |
-| Latest | Automatically built every week. |
-| Monthly | Automatically built every month. |
+| Latest | Automatically built every month. |
 | Stable | Automatically built every year. |
 
 # Note
