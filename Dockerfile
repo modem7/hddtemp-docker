@@ -3,7 +3,7 @@
 #
 
 # Pull base image.
-FROM ubuntu
+FROM ubuntu:20.04
 MAINTAINER Modem7
 
 # Install hddtemp
