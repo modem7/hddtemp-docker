@@ -14,6 +14,7 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get update \
  && rm /tmp/dependencies.json \
  && apt-get purge -y jq \
  && apt-get clean \
+ && apt autoremove -y \
  && rm -rf /var/lib/apt/lists/*
 
 COPY hddtemp.db /etc/
