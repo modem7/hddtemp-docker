@@ -8,8 +8,8 @@ http://savannah.nongnu.org/projects/hddtemp
 # Tags: 
 | Tag | Description |
 | :----: | --- |
-| Latest | Automatically built every month. |
-| Stable | Automatically built every year. |
+| Latest | Automatically built every week. |
+| 0.3-betaXX-XX | Specific version number |
 
 # Note
 NOTE: This repository will install hddtemp in the docker container from apt repositories. I do not maintain the hddtemp project.
