@@ -6,7 +6,7 @@
 FROM ubuntu:20.04
 MAINTAINER Modem7
 
-COPY dependencies.json /tmp/dependencies.json
+COPY scripts/dependencies.json /tmp/dependencies.json
 
 RUN DEBIAN_FRONTEND=noninteractive apt-get update \
  && apt-get install -y --no-install-recommends jq \
