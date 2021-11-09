@@ -26,4 +26,4 @@ EXPOSE 7634/udp 7634/tcp
 
 # Define default command.
 # example = -d --listen localhost --port 7634 /dev/s*
-ENTRYPOINT hddtemp $HDDTEMP_ARGS
+ENTRYPOINT /bin/bash -c hddtemp $HDDTEMP_ARGS
