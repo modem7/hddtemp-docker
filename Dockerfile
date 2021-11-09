@@ -9,7 +9,7 @@ MAINTAINER Modem7
 COPY scripts/dependencies.json /tmp/dependencies.json
 
 RUN DEBIAN_FRONTEND=noninteractive apt-get update \
- && apt-get install -y --no-install-recommends jq \
+ && apt-get install -y --no-install-recommends jq netcat \
  && jq -r 'to_entries | .[] | .key + "=" + .value' /tmp/dependencies.json | xargs apt-get install -y --no-install-recommends \
  && rm /tmp/dependencies.json \
  && apt-get purge -y jq \
@@ -21,6 +21,9 @@ COPY hddtemp.db /etc/
 
 EXPOSE 7634/udp 7634/tcp
 
+#HEALTHCHECK --interval=30s --timeout=20s --retries=3 --start-period=10s \
+#    CMD nc localhost 7634 -w 1 || exit 1
+
 # Define default command.
 # example = -d --listen localhost --port 7634 /dev/s*
-CMD hddtemp $HDDTEMP_ARGS
+ENTRYPOINT hddtemp $HDDTEMP_ARGS
