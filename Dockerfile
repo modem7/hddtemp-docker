@@ -4,7 +4,7 @@
 
 # Pull base image.
 FROM ubuntu:20.04
-MAINTAINER Modem7
+LABEL maintainer="Alex Lane"
 
 COPY scripts/dependencies.json /tmp/dependencies.json
 
