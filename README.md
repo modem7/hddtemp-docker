@@ -5,11 +5,21 @@
 Docker container for HDDTemp:
 http://savannah.nongnu.org/projects/hddtemp
 
+HDDTemp has been rebuilt from https://github.com/vitlav/hddtemp which has several improvements and fixes:
+
+### INCORPORATED PATCHES
+ * Implement drives auto-detection
+ * First try S.M.A.R.T. attribute 194, otherwise try attribute 190
+ * Add support for NVME bus
+ * Added ata-model patch (model is limited to 40 chars, so don't display junk after it)
+ * Allow binding to a listen address that doesn't exist yet
+ * Add -F --foreground option:  don't daemonize, stay in foreground
+ * See [change log](https://github.com/vitlav/hddtemp/blob/master/ChangeLog)
+
 # Tags: 
 | Tag | Description |
 | :----: | --- |
-| Latest | Automatically built every week. |
-| 0.3-betaXX-XX | Specific version number |
+| latest | Automatically built every month. |
 
 # Note
 NOTE: This repository will install hddtemp in the docker container from apt repositories. I do not maintain the hddtemp project.
