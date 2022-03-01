@@ -4,20 +4,23 @@
 
 # Pull base image.
 FROM ubuntu:20.04
-LABEL maintainer="Alex Lane"
+LABEL maintainer="modem7"
 
-COPY scripts/dependencies.json /tmp/dependencies.json
+RUN apt-get update \ 
+ && apt-get upgrade -y \ 
+ && apt-get install --no-install-recommends -y \ 
+            hddtemp \ 
+            netcat \
+            && apt-get clean \
+            && rm -rf /var/lib/apt/lists/*
 
-RUN DEBIAN_FRONTEND=noninteractive apt-get update \
- && apt-get install -y --no-install-recommends jq \
- && jq -r 'to_entries | .[] | .key + "=" + .value' /tmp/dependencies.json | xargs apt-get install -y --no-install-recommends \
- && rm /tmp/dependencies.json \
- && apt-get purge -y jq \
- && apt-get clean \
- && apt autoremove -y \
- && rm -rf /var/lib/apt/lists/*
+COPY hddtemp.db /usr/share/misc/
 
-COPY hddtemp.db /etc/
+COPY files /temp
+RUN rm -f /usr/sbin/hddtemp && \
+          cp /temp/hddtemp /usr/sbin/ && \
+          chmod +x /usr/sbin/hddtemp && \
+          rm -fdr /temp
 
 EXPOSE 7634/udp 7634/tcp
 
