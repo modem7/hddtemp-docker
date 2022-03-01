@@ -1,0 +1,6 @@
+git clone https://github.com/vitlav/hddtemp.git
+cd hddtemp/
+./autogen.sh
+./configure
+cd src/
+make
