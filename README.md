@@ -34,6 +34,26 @@ docker run -d \
 modem7/hddtemp-docker
 ```
 
+or
+
+```yaml
+  hddtemp:
+    image: modem7/hddtemp-docker:latest
+    container_name: HDDTemp
+    hostname: hddtemp
+    restart: always
+    ports:
+      - "7634:7634"
+    privileged: true
+    environment:
+      - HDDTEMP_ARGS="-q -d -F /dev/sd*"
+      - TZ=$TZ
+    volumes:
+      - /dev:/dev:ro
+```
+
+
+
 The hddtemp.db file was obtained from:
 http://www.guzu.net/linux/hddtemp.db
 
