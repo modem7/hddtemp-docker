@@ -45,6 +45,4 @@ steps:
 
 trigger:
   event:
-    - cron
-  cron:
-    - monthly
+    - custom

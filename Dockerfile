@@ -3,7 +3,7 @@
 #
 
 # Pull base image.
-FROM ubuntu:20.04
+FROM ubuntu:21.10
 LABEL maintainer="modem7"
 
 RUN apt-get update \ 
