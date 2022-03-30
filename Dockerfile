@@ -6,8 +6,8 @@
 FROM ubuntu:21.10
 LABEL maintainer="modem7"
 
-RUN add-apt-repository universe && add-apt-repository multiverse \
- && apt-get update \
+RUN apt-get update \
+ && apt-get install software-properties-common && add-apt-repository universe && add-apt-repository multiverse \
  && DEBIAN_FRONTEND=noninteractive \
  && apt-get upgrade -y \ 
  && apt-get install --no-install-recommends -y \ 
