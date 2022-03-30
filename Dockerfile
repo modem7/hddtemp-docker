@@ -1,16 +1,12 @@
 #
-# hddtemp Dockerfile
-#
-
-# Pull base image.
-FROM ubuntu:21.10
+FROM ubuntu:22.04
 LABEL maintainer="modem7"
 
-RUN apt-get update \ 
- && apt-get upgrade -y \ 
+RUN echo deb [arch=amd64] http://eu.archive.ubuntu.com/ubuntu/ impish universe >> /etc/apt/sources.list  && echo deb [arch=arm64,armhf] http://ports.ubuntu.com/ubuntu-ports/ impish universe >> /etc/apt/sources.list \
+ && apt-get update \
  && apt-get install --no-install-recommends -y \ 
-            hddtemp \ 
             netcat \
+            hddtemp \ 
             && apt-get clean \
             && rm -rf /var/lib/apt/lists/*
 
