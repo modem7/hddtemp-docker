@@ -6,7 +6,9 @@
 FROM ubuntu:21.10
 LABEL maintainer="modem7"
 
-RUN apt-get update \ 
+RUN add-apt-repository universe && add-apt-repository multiverse \
+ && apt-get update \
+ && DEBIAN_FRONTEND=noninteractive \
  && apt-get upgrade -y \ 
  && apt-get install --no-install-recommends -y \ 
             hddtemp \ 
