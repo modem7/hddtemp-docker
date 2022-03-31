@@ -1,18 +1,12 @@
 #
-# hddtemp Dockerfile
-#
-
-# Pull base image.
 FROM ubuntu:21.10
 LABEL maintainer="modem7"
 
-RUN apt-get update \
- && apt-get install software-properties-common && add-apt-repository universe && add-apt-repository multiverse \
- && DEBIAN_FRONTEND=noninteractive \
- && apt-get upgrade -y \ 
+RUN echo deb http://archive.ubuntu.com/ubuntu impish universe >> /etc/apt/sources.list \
+ && apt-get update \
  && apt-get install --no-install-recommends -y \ 
-            hddtemp \ 
             netcat \
+            hddtemp \ 
             && apt-get clean \
             && rm -rf /var/lib/apt/lists/*
 
