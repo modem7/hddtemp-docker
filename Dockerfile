@@ -1,5 +1,5 @@
 #
-FROM ubuntu:21.10
+FROM ubuntu:22.04
 LABEL maintainer="modem7"
 
 RUN echo deb http://archive.ubuntu.com/ubuntu impish universe >> /etc/apt/sources.list \
