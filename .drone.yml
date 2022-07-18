@@ -43,7 +43,7 @@ steps:
     DOCKER_PASS:
       from_secret: docker_password
     PUSHRM_FILE: README.md
-    PUSHRM_SHORT: Docker container for hddtemp: http://savannah.nongnu.org/projects/hddtemp
+    PUSHRM_SHORT: Docker container for hddtemp - http://savannah.nongnu.org/projects/hddtemp
     PUSHRM_TARGET: modem7/hddtemp-docker
   when:
     status:
