@@ -1,14 +1,14 @@
 #
-FROM ubuntu:22.04
+FROM bitnami/minideb:bullseye
 LABEL maintainer="modem7"
 
-RUN echo deb [arch=amd64] http://eu.archive.ubuntu.com/ubuntu/ impish universe >> /etc/apt/sources.list  && echo deb [arch=arm64,armhf] http://ports.ubuntu.com/ubuntu-ports/ impish universe >> /etc/apt/sources.list \
- && apt-get update \
- && apt-get install --no-install-recommends -y \ 
+RUN apt-get update && \
+    DEBIAN_FRONTEND=noninteractive \
+    apt-get install --no-install-recommends -y \
             netcat \
-            hddtemp \ 
-            && apt-get clean \
-            && rm -rf /var/lib/apt/lists/*
+            hddtemp && \
+            apt-get clean && \
+            rm -rf /var/lib/apt/lists/*
 
 COPY hddtemp.db /usr/share/misc/
 
