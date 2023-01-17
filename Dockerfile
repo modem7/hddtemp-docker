@@ -13,7 +13,6 @@ RUN --mount=type=cache,id=aptcache,target=/var/cache/apt,sharing=locked \
     apt-get install -y --no-install-recommends \
             build-essential                    \
             automake                           \
-            autotools-dev                      \
             autopoint                          \
             gettext                            \
             pkg-config
