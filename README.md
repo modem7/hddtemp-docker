@@ -19,10 +19,11 @@ HDDTemp has been rebuilt from https://github.com/vitlav/hddtemp which has severa
  * Add -F --foreground option:  don't daemonize, stay in foreground
  * See [change log](https://github.com/vitlav/hddtemp/blob/master/ChangeLog)
 
-# Tags: 
+# Tags
 | Tag | Description |
 | :----: | --- |
-| latest | Automatically built every month. |
+| latest | Latest version |
+| 0.4.x | Versioned against vitlav repo |
 
 # Note
 NOTE: This repository will install hddtemp in the docker container from apt repositories. I do not maintain the hddtemp project.

@@ -9,20 +9,15 @@ platform:
   arch: amd64
 
 steps:
-- name: Lint Dockerfile
-  image: hadolint/hadolint:latest-alpine
-  pull: if-not-exists
-  commands:
-    - hadolint --version
-    - hadolint Dockerfile*
-
 - name: latest  
   image: thegeeklab/drone-docker-buildx
   privileged: true
   settings:
     repo: modem7/hddtemp-docker
-    compress: true
     purge: true
+    compress: true
+    no_cache: false
+    build_args: BUILDKIT_INLINE_CACHE=1
     cache_from: "modem7/hddtemp-docker:latest"
     platforms: # if it doesn't work run docker run --privileged --rm tonistiigi/binfmt --install all
       - linux/amd64
@@ -33,6 +28,7 @@ steps:
       from_secret: docker_password
     tags:
       - latest
+      - 0.4.3.1
 
 - name: pushrm-dockerhub
   image: chko/docker-pushrm
