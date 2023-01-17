@@ -55,13 +55,9 @@ or
       - /dev:/dev:ro
 ```
 
-
-
 The hddtemp.db file was obtained from:
-http://www.guzu.net/linux/hddtemp.db
+https://de.freedif.org/savannah/hddtemp/hddtemp.db
 
-I do not know how up-to-date that file is. I suspect it has not been maintained...
-Therefore I decided to copy it into this repository and have made a couple additions.
-The hddtemp.db file in this repository will get loaded into the container.
+Then it was updated from the [Gentoo repo](https://gitweb.gentoo.org/repo/gentoo.git/tree/app-admin/hddtemp).
 
 Enjoy!

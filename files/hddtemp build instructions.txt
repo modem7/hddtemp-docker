@@ -1,0 +1,8 @@
+Ubuntu instructions:
+apt update
+DEBIAN_FRONTEND=noninteractive apt-get install -y git build-essential automake autotools-dev autopoint gettext pkg-config
+git clone https://github.com/vitlav/hddtemp.git
+cd hddtemp/
+autoreconf -vsi --force
+./configure
+make

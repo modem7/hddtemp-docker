@@ -1,22 +1,78 @@
-#
-FROM bitnami/minideb:bullseye
+# syntax = docker/dockerfile-upstream:master-labs
+
+FROM debian:bullseye AS build
+
+ENV DEBIAN_FRONTEND=noninteractive
+RUN --mount=type=cache,id=aptcache,target=/var/cache/apt,sharing=locked \
+    --mount=type=cache,id=libcache,target=/var/lib/apt,sharing=locked \
+    <<EOF
+    set -xe
+    rm -fv /etc/apt/apt.conf.d/docker-clean
+    echo 'Binary::apt::APT::Keep-Downloaded-Packages "true";' > /etc/apt/apt.conf.d/keep-cache
+    apt-get update
+    apt-get install -y --no-install-recommends \
+            build-essential                    \
+            automake                           \
+            autotools-dev                      \
+            autopoint                          \
+            gettext                            \
+            pkg-config
+EOF
+
+ADD --link --keep-git-dir=false https://github.com/vitlav/hddtemp.git /hddtemp
+
+RUN <<EOF
+    set -x
+    cd hddtemp/
+    autoreconf -vsi --force
+    ./configure
+    make
+EOF
+
+# Update Database from Gentoo
+
+FROM debian:bullseye AS updatedb
+
+ENV DEBIAN_FRONTEND=noninteractive
+RUN --mount=type=cache,id=aptcache,target=/var/cache/apt,sharing=locked \
+    --mount=type=cache,id=libcache,target=/var/lib/apt,sharing=locked \
+    <<EOF
+    set -xe
+    rm -fv /etc/apt/apt.conf.d/docker-clean
+    echo 'Binary::apt::APT::Keep-Downloaded-Packages "true";' > /etc/apt/apt.conf.d/keep-cache
+    apt-get update
+    apt-get install -y wget 
+EOF
+
+COPY --link --chmod=755 files/updatedb.sh /updatedb.sh
+
+RUN <<EOF
+    set -x
+    wget https://de.freedif.org/savannah/hddtemp/hddtemp.db
+    ./updatedb.sh
+EOF
+
+FROM bitnami/minideb:bullseye as final
 LABEL maintainer="modem7"
 
-RUN apt-get update && \
-    DEBIAN_FRONTEND=noninteractive \
-    apt-get install --no-install-recommends -y \
-            netcat \
-            hddtemp && \
-            apt-get clean && \
-            rm -rf /var/lib/apt/lists/*
+ENV DEBIAN_FRONTEND=noninteractive
+RUN --mount=type=cache,id=aptcache,target=/var/cache/apt,sharing=locked \
+    --mount=type=cache,id=libcache,target=/var/lib/apt,sharing=locked \
+    <<EOF
+    set -xe
+    rm -fv /etc/apt/apt.conf.d/docker-clean
+    echo 'Binary::apt::APT::Keep-Downloaded-Packages "true";' > /etc/apt/apt.conf.d/keep-cache
+    apt-get update
+    apt-get install -y --no-install-recommends \
+            netcat                             \
+            hddtemp
+EOF
 
-COPY hddtemp.db /usr/share/misc/
+# Copy hddtemp from the previous stage:
+COPY --link --chmod=755 --from=build /hddtemp/src/hddtemp /usr/sbin/
 
-COPY files /temp
-RUN rm -f /usr/sbin/hddtemp && \
-          cp /temp/hddtemp /usr/sbin/ && \
-          chmod +x /usr/sbin/hddtemp && \
-          rm -fdr /temp
+# Copy hddtemp.db /usr/share/misc/
+COPY --link --chmod=755 --from=updatedb /hddtemp.db /usr/share/misc/
 
 EXPOSE 7634/udp 7634/tcp
 
