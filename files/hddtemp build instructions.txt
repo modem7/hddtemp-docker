@@ -1,8 +1,16 @@
-Ubuntu instructions:
+Debian instructions:
 apt update
-DEBIAN_FRONTEND=noninteractive apt-get install -y git build-essential automake autotools-dev autopoint gettext pkg-config
+DEBIAN_FRONTEND=noninteractive apt-get install -y git build-essential automake autopoint gettext pkg-config wget expect
 git clone https://github.com/vitlav/hddtemp.git
 cd hddtemp/
-autoreconf -vsi --force
+wget 'https://savannah.gnu.org/cgi-bin/viewcvs/*checkout*/config/config/config.guess'
+wget 'https://savannah.gnu.org/cgi-bin/viewcvs/*checkout*/config/config/config.sub'
+expect <<END
+        spawn gettextize -f
+        expect "Press Return to acknowledge the previous three paragraphs."
+        send "\r"
+        expect eof
+END
+autoreconf -vif
 ./configure
 make

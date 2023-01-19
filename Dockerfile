@@ -11,11 +11,13 @@ RUN --mount=type=cache,id=aptcache,target=/var/cache/apt,sharing=locked \
     echo 'Binary::apt::APT::Keep-Downloaded-Packages "true";' > /etc/apt/apt.conf.d/keep-cache
     apt-get update
     apt-get install -y --no-install-recommends \
-            build-essential                    \
             automake                           \
             autopoint                          \
+            build-essential                    \
+            expect                             \
             gettext                            \
-            pkg-config
+            pkg-config                         \
+            wget
 EOF
 
 ADD --link --keep-git-dir=false https://github.com/vitlav/hddtemp.git /hddtemp
@@ -23,7 +25,15 @@ ADD --link --keep-git-dir=false https://github.com/vitlav/hddtemp.git /hddtemp
 RUN <<EOF
     set -x
     cd hddtemp/
-    autoreconf -vsi --force
+    wget 'https://savannah.gnu.org/cgi-bin/viewcvs/*checkout*/config/config/config.guess'
+    wget 'https://savannah.gnu.org/cgi-bin/viewcvs/*checkout*/config/config/config.sub'
+    expect <<-END
+        spawn gettextize -f
+        expect "Press Return to acknowledge the previous three paragraphs."
+        send "\r"
+        expect eof
+END
+    autoreconf -vif
     ./configure
     make
 EOF
