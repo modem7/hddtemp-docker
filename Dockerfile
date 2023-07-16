@@ -1,6 +1,6 @@
 # syntax = docker/dockerfile-upstream:master-labs
 
-FROM debian:bullseye AS build
+FROM debian:bookworm AS build
 
 ENV DEBIAN_FRONTEND=noninteractive
 RUN --mount=type=cache,id=aptcache,target=/var/cache/apt,sharing=locked \
@@ -40,7 +40,7 @@ EOF
 
 # Update Database from Gentoo
 
-FROM debian:bullseye AS updatedb
+FROM debian:bookworm AS updatedb
 
 ENV DEBIAN_FRONTEND=noninteractive
 RUN --mount=type=cache,id=aptcache,target=/var/cache/apt,sharing=locked \
