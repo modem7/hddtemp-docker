@@ -5,6 +5,8 @@
 [![Build Status](https://drone.modem7.com/api/badges/modem7/hddtemp-docker/status.svg)](https://drone.modem7.com/modem7/hddtemp-docker)
 [![Docker build CI](https://github.com/modem7/hddtemp-docker/actions/workflows/CI.yml/badge.svg?branch=master)](https://github.com/modem7/hddtemp-docker/actions/workflows/CI.yml)
 
+[!["Buy Me A Coffee"](https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png)](https://www.buymeacoffee.com/modem7)
+
 Docker container for HDDTemp:
 http://savannah.nongnu.org/projects/hddtemp
 
