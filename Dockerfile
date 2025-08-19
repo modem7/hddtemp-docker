@@ -1,6 +1,6 @@
 # syntax = docker/dockerfile-upstream:master-labs
 
-FROM debian:bookworm AS builddeb
+FROM debian:trixie AS builddeb
 
 ENV DEBIAN_FRONTEND=noninteractive \
     DEBEMAIL=me@domain.com \
@@ -29,7 +29,7 @@ RUN <<EOF
 EOF
 
 
-FROM debian:bookworm AS build
+FROM debian:trixie AS build
 
 ENV DEBIAN_FRONTEND=noninteractive
 RUN --mount=type=cache,id=aptcache,target=/var/cache/apt,sharing=locked \
@@ -69,7 +69,7 @@ EOF
 
 # Update Database from Gentoo
 
-FROM debian:bookworm AS updatedb
+FROM debian:trixie AS updatedb
 
 ENV DEBIAN_FRONTEND=noninteractive
 RUN --mount=type=cache,id=aptcache,target=/var/cache/apt,sharing=locked \
